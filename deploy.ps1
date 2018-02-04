@@ -9,7 +9,6 @@ $HADOOP_VERSION = "3.0.0"
 
 $HADOOP_URL = "http://mirrors.tuna.tsinghua.edu.cn/apache/hadoop/common/hadoop-${HADOOP_VERSION}/hadoop-${HADOOP_VERSION}.tar.gz"
 # Change this url if you want to use another mirror
-
 function Set-System-Variable ($name, $value) {
     [System.Environment]::SetEnvironmentVariable($name, $value, [System.EnvironmentVariableTarget]::Machine)
 }
@@ -63,6 +62,10 @@ function Reload-Environment () {
 
 function Test-Command ($command) {
     return Get-Command $command -ErrorAction Ignore
+}
+
+if (-not (Test-Command "git")) {
+    Write-Output "Please install git first."
 }
 
 Get-Hadoop
